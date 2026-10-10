@@ -192,6 +192,64 @@ ColumnLayout {
 
   NToggle {
     Layout.fillWidth: true
+    label: I18n.tr("panels.bar.appearance-show-bar-outline-label")
+    description: I18n.tr("panels.bar.appearance-show-bar-outline-description")
+    checked: Settings.data.bar.showBarOutline
+    defaultValue: Settings.getDefaultValue("bar.showBarOutline")
+    onToggled: checked => Settings.data.bar.showBarOutline = checked
+  }
+
+  NToggle {
+    Layout.fillWidth: true
+    label: I18n.tr("panels.bar.appearance-use-gradient-label")
+    description: I18n.tr("panels.bar.appearance-use-gradient-description")
+    checked: Settings.data.bar.useGradient
+    defaultValue: Settings.getDefaultValue("bar.useGradient")
+    onToggled: checked => Settings.data.bar.useGradient = checked
+    visible: Settings.data.bar.backgroundStyle === "strip"
+  }
+
+  NComboBox {
+    Layout.fillWidth: true
+    label: I18n.tr("panels.bar.appearance-background-style-label")
+    description: I18n.tr("panels.bar.appearance-background-style-description")
+    model: [
+      {
+        "key": "strip",
+        "name": I18n.tr("panels.bar.background-style.strip")
+      },
+      {
+        "key": "qsbar",
+        "name": I18n.tr("panels.bar.background-style.qsbar")
+      },
+      {
+        "key": "sumi",
+        "name": I18n.tr("panels.bar.background-style.sumi")
+      },
+      {
+        "key": "kairos",
+        "name": I18n.tr("panels.bar.background-style.kairos")
+      },
+      {
+        "key": "orbit",
+        "name": I18n.tr("panels.bar.background-style.orbit")
+      },
+      {
+        "key": "chroma",
+        "name": I18n.tr("panels.bar.background-style.chroma")
+      },
+      {
+        "key": "islands",
+        "name": I18n.tr("panels.bar.background-style.islands")
+      }
+    ]
+    currentKey: Settings.data.bar.backgroundStyle
+    defaultValue: Settings.getDefaultValue("bar.backgroundStyle")
+    onSelected: key => Settings.data.bar.backgroundStyle = key
+  }
+
+  NToggle {
+    Layout.fillWidth: true
     label: I18n.tr("panels.bar.appearance-show-capsule-label")
     description: I18n.tr("panels.bar.appearance-show-capsule-description")
     checked: Settings.data.bar.showCapsule

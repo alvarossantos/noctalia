@@ -206,11 +206,18 @@ PanelWindow {
   Region {
     id: blurRegion
     // ── Non-framed bar (simple/floating): single rectangle with bar corner states ──
+    // Only blur the bar band for continuous-band styles ("strip"/"qsbar");
+    // islands/cards scenes float on their own fill, so a full-width blur
+    // would read as a solid bar.
+    readonly property bool blurStrip: {
+      var s = Settings.data.bar.backgroundStyle;
+      return (s === "strip" || s === "qsbar") && !barPlaceholder.isFramed && root.barShouldShow && !barPlaceholder.isHidden;
+    }
     Region {
-      x: (!barPlaceholder.isFramed && root.barShouldShow && !barPlaceholder.isHidden) ? barPlaceholder.x : 0
-      y: (!barPlaceholder.isFramed && root.barShouldShow && !barPlaceholder.isHidden) ? barPlaceholder.y : 0
-      width: (!barPlaceholder.isFramed && root.barShouldShow && !barPlaceholder.isHidden) ? barPlaceholder.width : 0
-      height: (!barPlaceholder.isFramed && root.barShouldShow && !barPlaceholder.isHidden) ? barPlaceholder.height : 0
+      x: blurRegion.blurStrip ? barPlaceholder.x : 0
+      y: blurRegion.blurStrip ? barPlaceholder.y : 0
+      width: blurRegion.blurStrip ? barPlaceholder.width : 0
+      height: blurRegion.blurStrip ? barPlaceholder.height : 0
       radius: Style.radiusL
       topLeftCorner: barPlaceholder.topLeftCornerState
       topRightCorner: barPlaceholder.topRightCornerState

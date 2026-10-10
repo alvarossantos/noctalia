@@ -179,24 +179,29 @@ ColumnLayout {
     currentIndex: tabView.currentIndex
 
     NTabButton {
-      text: I18n.tr("common.appearance")
+      text: I18n.tr("common.styles")
       tabIndex: 0
       checked: subTabBar.currentIndex === 0
     }
     NTabButton {
-      text: I18n.tr("common.widgets")
+      text: I18n.tr("common.appearance")
       tabIndex: 1
       checked: subTabBar.currentIndex === 1
     }
     NTabButton {
-      text: I18n.tr("common.behavior")
+      text: I18n.tr("common.widgets")
       tabIndex: 2
       checked: subTabBar.currentIndex === 2
     }
     NTabButton {
-      text: I18n.tr("common.monitors")
+      text: I18n.tr("common.behavior")
       tabIndex: 3
       checked: subTabBar.currentIndex === 3
+    }
+    NTabButton {
+      text: I18n.tr("common.monitors")
+      tabIndex: 4
+      checked: subTabBar.currentIndex === 4
     }
   }
 
@@ -209,6 +214,7 @@ ColumnLayout {
     id: tabView
     currentIndex: subTabBar.currentIndex
 
+    BarStylesSubTab {}
     AppearanceSubTab {}
     WidgetsSubTab {
       availableWidgets: availableWidgets

@@ -53,6 +53,16 @@ ShapePath {
   readonly property real frameThickness: Settings.data.bar.frameThickness ?? 12
   readonly property real frameRadius: Settings.data.bar.frameRadius ?? 20
 
+  // Hairline outline around the bar surface (ryoku-style 1px edge)
+  readonly property bool showBarOutline: Settings.data.bar.showBarOutline
+
+  // Subtle vertical depth gradient on the bar fill
+  readonly property bool useGradient: Settings.data.bar.useGradient
+
+  // Only the "strip" style draws the continuous band here; "islands"/"cards"
+  // draw their own backgrounds in the content layer (Bar.qml).
+  readonly property bool stripVisible: Settings.data.bar.backgroundStyle === "strip" || Settings.data.bar.backgroundStyle === "qsbar"
+
   // Bar position - since bar's parent fills the screen and Shape also fills the screen,
   // we can use bar.x and bar.y directly (they're already in screen coordinates)
   readonly property point barMappedPos: bar ? Qt.point(bar.x, bar.y) : Qt.point(0, 0)
@@ -132,9 +142,41 @@ ShapePath {
     }
   }
 
+  // Gradient stops: subtle top-light/bottom-dark depth when useGradient is on.
+  // When off, both stops collapse to the flat base color (visually identical to a solid fill).
+  readonly property color _gradTop: {
+    if (!isRenderable || !stripVisible)
+      return "transparent";
+    var c = useGradient ? Qt.lighter(backgroundColor, 1.07) : backgroundColor;
+    return Qt.rgba(c.r, c.g, c.b, backgroundColor.a * opacityFactor);
+  }
+  readonly property color _gradBottom: {
+    if (!isRenderable || !stripVisible)
+      return "transparent";
+    var c = useGradient ? Qt.darker(backgroundColor, 1.16) : backgroundColor;
+    return Qt.rgba(c.r, c.g, c.b, backgroundColor.a * opacityFactor);
+  }
+
   // ShapePath configuration
-  strokeWidth: -1 // No stroke, fill only
-  fillColor: isRenderable ? Qt.rgba(backgroundColor.r, backgroundColor.g, backgroundColor.b, backgroundColor.a * opacityFactor) : "transparent"
+  // Hairline outline (1px) when showBarOutline; otherwise no stroke (fill only).
+  strokeWidth: (showBarOutline && stripVisible && isRenderable) ? Style.borderS : -1
+  strokeColor: (showBarOutline && stripVisible && isRenderable) ? Qt.rgba(NColor.mOnSurface.r, NColor.mOnSurface.g, NColor.mOnSurface.b, 0.2 * opacityFactor) : "transparent"
+  fillColor: (isRenderable && stripVisible) ? Qt.rgba(backgroundColor.r, backgroundColor.g, backgroundColor.b, backgroundColor.a * opacityFactor) : "transparent"
+  fillGradient: LinearGradient {
+    // Vertical for horizontal bars, horizontal for vertical bars (screen coords)
+    x1: root.barIsVertical ? root.barMappedPos.x : 0
+    y1: root.barIsVertical ? 0 : root.barMappedPos.y
+    x2: root.barIsVertical ? (root.barMappedPos.x + root.barWidth) : 0
+    y2: root.barIsVertical ? 0 : (root.barMappedPos.y + root.barHeight)
+    GradientStop {
+      position: 0.0
+      color: root._gradTop
+    }
+    GradientStop {
+      position: 1.0
+      color: root._gradBottom
+    }
+  }
   fillRule: isFramed ? ShapePath.OddEvenFill : ShapePath.WindingFill
 
   // Starting position — falls back to off-screen when not renderable so that

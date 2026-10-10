@@ -204,6 +204,11 @@ Singleton {
     property JsonObject bar: JsonObject {
       property string barType: "simple" // "simple", "floating", "framed"
       property string position: "top" // "top", "bottom", "left", or "right"
+      property string activeStyle: "default" // id of the applied bar style preset
+      property list<var> customStyles: [] // user-saved bar style presets
+      property bool showBarOutline: false // hairline 1px border around the bar surface
+      property bool useGradient: false // subtle vertical gradient on the bar background
+      property string backgroundStyle: "strip" // "strip" (continuous band), "islands" (3 section pills), "cards" (no band, widgets float)
       property list<string> monitors: [] // holds bar visibility per monitor
       property string density: "default" // "compact", "default", "comfortable"
       property bool showOutline: false

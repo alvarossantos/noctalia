@@ -52,6 +52,15 @@ Item {
         }
 
         /**
+        *  Bar notch (qsbar scene) — behind the strip, same fill
+        */
+        BarNotch {
+          bar: root.bar
+          windowRoot: root.windowRoot
+          backgroundColor: panelBackgroundColor
+        }
+
+        /**
         *  Bar
         */
         BarBackground {
@@ -170,6 +179,12 @@ Item {
             windowRoot: root.windowRoot
             backgroundColor: panelBackgroundColor
           }
+        }
+
+        BarNotch {
+          bar: root.bar
+          windowRoot: root.windowRoot
+          backgroundColor: panelBackgroundColor
         }
 
         NDropShadow {

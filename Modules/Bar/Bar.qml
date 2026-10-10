@@ -12,6 +12,7 @@ import qs.Services.Compositor
 import qs.Services.Media
 import qs.Services.UI
 import qs.Widgets
+import "../../Helpers/ColorsConvert.js" as ColorsConvert
 
 // Bar Component
 Item {
@@ -554,6 +555,7 @@ Item {
 
       // Top section (left widgets)
       ColumnLayout {
+        id: vTopSection
         x: Style.pixelAlignCenter(parent.width, width)
         anchors.top: parent.top
         anchors.topMargin: verticalBarMargin + Settings.data.bar.contentPadding
@@ -580,6 +582,7 @@ Item {
 
       // Center section (center widgets)
       ColumnLayout {
+        id: vCenterSection
         x: Style.pixelAlignCenter(parent.width, width)
         anchors.verticalCenter: parent.verticalCenter
         spacing: Settings.data.bar.widgetSpacing
@@ -605,6 +608,7 @@ Item {
 
       // Bottom section (right widgets)
       ColumnLayout {
+        id: vBottomSection
         x: Style.pixelAlignCenter(parent.width, width)
         anchors.bottom: parent.bottom
         anchors.bottomMargin: verticalBarMargin + Settings.data.bar.contentPadding
@@ -627,6 +631,65 @@ Item {
             Layout.alignment: Qt.AlignHCenter
           }
         }
+      }
+
+      // ---- Sumi scene chrome (backgroundStyle === "sumi") ----
+      // Ink brush rail: a thin vertical hairline threading the sections,
+      // with a small square tick at each end — sumi's paper-and-ink motif.
+      readonly property bool sumiMode: Settings.data.bar.backgroundStyle === "sumi"
+
+      Rectangle {
+        visible: parent.sumiMode
+        x: Style.pixelAlignCenter(parent.width, Style.borderS)
+        y: vTopSection.y + vTopSection.height + Style.marginM
+        width: Style.borderS
+        height: Math.max(0, vBottomSection.y - Style.marginM - y)
+        color: Qt.rgba(NColor.mOnSurface.r, NColor.mOnSurface.g, NColor.mOnSurface.b, 0.22)
+        z: -1
+      }
+
+      // Top end tick (ink square)
+      Rectangle {
+        visible: parent.sumiMode
+        x: Style.pixelAlignCenter(parent.width, Style.marginXS)
+        y: vTopSection.y + vTopSection.height + Style.marginXS
+        width: Style.marginXS
+        height: Style.marginXS
+        color: Qt.rgba(NColor.mOnSurface.r, NColor.mOnSurface.g, NColor.mOnSurface.b, 0.45)
+        z: -1
+      }
+
+      // Bottom end tick (ink square)
+      Rectangle {
+        visible: parent.sumiMode
+        x: Style.pixelAlignCenter(parent.width, Style.marginXS)
+        y: vBottomSection.y - Style.marginM + Style.marginXS / 2
+        width: Style.marginXS
+        height: Style.marginXS
+        color: Qt.rgba(NColor.mOnSurface.r, NColor.mOnSurface.g, NColor.mOnSurface.b, 0.45)
+        z: -1
+      }
+
+      // Section separators — short horizontal ink rules between the three
+      // vertical groups, echoing sumi's ruled-paper motif.
+      Rectangle {
+        visible: parent.sumiMode && vTopSection.height > 0 && vCenterSection.height > 0
+        x: Style.pixelAlignCenter(parent.width, Math.round(parent.width * 0.5))
+        y: vTopSection.y + vTopSection.height + Style.marginXS
+        width: Math.round(parent.width * 0.5)
+        height: Style.borderS
+        color: Qt.rgba(NColor.mOnSurface.r, NColor.mOnSurface.g, NColor.mOnSurface.b, 0.18)
+        z: -1
+      }
+
+      Rectangle {
+        visible: parent.sumiMode && vCenterSection.height > 0 && vBottomSection.height > 0
+        x: Style.pixelAlignCenter(parent.width, Math.round(parent.width * 0.5))
+        y: vBottomSection.y - Style.marginXS - Style.borderS
+        width: Math.round(parent.width * 0.5)
+        height: Style.borderS
+        color: Qt.rgba(NColor.mOnSurface.r, NColor.mOnSurface.g, NColor.mOnSurface.b, 0.18)
+        z: -1
       }
     }
   }
@@ -752,6 +815,224 @@ Item {
                             "sectionWidgetsCount": root.rightWidgetsModel.count
                           })
             Layout.alignment: Qt.AlignVCenter
+          }
+        }
+      }
+
+      // ---- Section background pills (backgroundStyle === "islands") ----
+      // One rounded island behind each section — evokes the multi-island ryoku
+      // bars (imi M3, sukunabikona). Only rendered for the "islands" style.
+      Rectangle {
+        visible: Settings.data.bar.backgroundStyle === "islands" && leftSection.width > 0
+        x: leftSection.x - Style.marginXS
+        width: leftSection.width + Style.margin2XS
+        height: root.capsuleHeight
+        y: Style.pixelAlignCenter(parent.height, height)
+        radius: Style.radiusS
+        color: Qt.rgba(NColor.mSurfaceVariant.r, NColor.mSurfaceVariant.g, NColor.mSurfaceVariant.b, 0.9)
+        border.width: Style.borderS
+        border.color: Qt.rgba(NColor.mOnSurface.r, NColor.mOnSurface.g, NColor.mOnSurface.b, 0.2)
+        z: -1
+      }
+
+      Rectangle {
+        visible: Settings.data.bar.backgroundStyle === "islands" && centerSection.width > 0
+        x: centerSection.x - Style.marginXS
+        width: centerSection.width + Style.margin2XS
+        height: root.capsuleHeight
+        y: Style.pixelAlignCenter(parent.height, height)
+        radius: Style.radiusS
+        color: Qt.rgba(NColor.mSurfaceVariant.r, NColor.mSurfaceVariant.g, NColor.mSurfaceVariant.b, 0.9)
+        border.width: Style.borderS
+        border.color: Qt.rgba(NColor.mOnSurface.r, NColor.mOnSurface.g, NColor.mOnSurface.b, 0.2)
+        z: -1
+      }
+
+      Rectangle {
+        visible: Settings.data.bar.backgroundStyle === "islands" && rightSection.width > 0
+        x: rightSection.x - Style.marginXS
+        width: rightSection.width + Style.margin2XS
+        height: root.capsuleHeight
+        y: Style.pixelAlignCenter(parent.height, height)
+        radius: Style.radiusS
+        color: Qt.rgba(NColor.mSurfaceVariant.r, NColor.mSurfaceVariant.g, NColor.mSurfaceVariant.b, 0.9)
+        border.width: Style.borderS
+        border.color: Qt.rgba(NColor.mOnSurface.r, NColor.mOnSurface.g, NColor.mOnSurface.b, 0.2)
+        z: -1
+      }
+
+      // ---- Orbit scene chrome (backgroundStyle === "orbit") ----
+      readonly property bool orbitMode: Settings.data.bar.backgroundStyle === "orbit"
+      // Vertical center of the decorative trajectory line (slightly below middle).
+      readonly property real orbitLineY: Math.round(parent.height * 0.56)
+
+      // 1px trajectory hairline spanning the bar, behind all sections.
+      Rectangle {
+        visible: parent.orbitMode
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.leftMargin: Style.marginM
+        anchors.rightMargin: Style.marginM
+        y: parent.orbitLineY
+        height: Style.borderS
+        color: Qt.rgba(NColor.mOutline.r, NColor.mOutline.g, NColor.mOutline.b, 0.55)
+        z: -2
+      }
+
+      // Left end dot of the trajectory.
+      Rectangle {
+        visible: parent.orbitMode
+        x: Style.marginM - width / 2
+        y: parent.orbitLineY - height / 2 - Style.borderS / 2
+        width: Style.marginM + Style.marginXXS   // ~7px scaled
+        height: width
+        radius: width / 2
+        color: NColor.mPrimary
+        opacity: 0.8
+        z: -2
+      }
+
+      // Right end dot of the trajectory.
+      Rectangle {
+        visible: parent.orbitMode
+        x: parent.width - Style.marginM - width / 2
+        y: parent.orbitLineY - height / 2 - Style.borderS / 2
+        width: Style.marginM + Style.marginXXS
+        height: width
+        radius: width / 2
+        color: NColor.mPrimary
+        opacity: 0.8
+        z: -2
+      }
+
+      // Central clock pill behind the center section (the orbit "clockCore").
+      Rectangle {
+        visible: parent.orbitMode && centerSection.width > 0
+        x: centerSection.x - Style.marginL
+        width: centerSection.width + Style.marginL * 2
+        height: Math.min(parent.height, root.capsuleHeight + Style.margin2XS)
+        y: Style.pixelAlignCenter(parent.height, height)
+        radius: height / 2
+        color: Qt.rgba(NColor.mSurface.r, NColor.mSurface.g, NColor.mSurface.b, 0.97)
+        border.width: Style.borderS
+        border.color: Qt.rgba(NColor.mPrimary.r, NColor.mPrimary.g, NColor.mPrimary.b, 0.56)
+        z: -1
+      }
+
+      // ---- Chroma scene chrome (backgroundStyle === "chroma") ----
+      // Chroma's signature: discrete full-height cards floating with gaps,
+      // the clock card the only accent-coloured one.
+      // Left cluster card (surface).
+      Rectangle {
+        visible: Settings.data.bar.backgroundStyle === "chroma" && leftSection.width > 0
+        x: leftSection.x - Style.marginM
+        width: leftSection.width + Style.marginM * 2
+        height: parent.height
+        radius: Style.radiusXS
+        color: Qt.rgba(NColor.mSurfaceVariant.r, NColor.mSurfaceVariant.g, NColor.mSurfaceVariant.b, 0.85)
+        z: -1
+      }
+
+      // Right cluster card (surface).
+      Rectangle {
+        visible: Settings.data.bar.backgroundStyle === "chroma" && rightSection.width > 0
+        x: rightSection.x - Style.marginM
+        width: rightSection.width + Style.marginM * 2
+        height: parent.height
+        radius: Style.radiusXS
+        color: Qt.rgba(NColor.mSurfaceVariant.r, NColor.mSurfaceVariant.g, NColor.mSurfaceVariant.b, 0.85)
+        z: -1
+      }
+
+      // Clock card — the single accent module (accent(0) = lighter primary).
+      Rectangle {
+        id: chromaClockCard
+        visible: Settings.data.bar.backgroundStyle === "chroma" && centerSection.width > 0
+        x: centerSection.x - Style.marginM
+        width: centerSection.width + Style.marginM * 2
+        height: parent.height
+        radius: Style.radiusXS
+        // Chroma accent(0). Noctalia's primary is a pale pastel (L~85%):
+        // lighten → white, plain darken → gray. Boost saturation + lower L
+        // to recreate ryoku's vivid accent from a saturated Material primary.
+        color: ColorsConvert.adjustLightnessAndSaturation(NColor.mPrimary.toString(), -22, 45)
+        z: -1
+      }
+
+      // ---- QS Bar scene chrome (backgroundStyle === "qsbar") ----
+      // The band itself lives in BarBackground; the identity here is the
+      // ink hairline separators flanking the centre group (paper-and-ink).
+      readonly property bool qsbarMode: Settings.data.bar.backgroundStyle === "qsbar"
+
+      Rectangle {
+        visible: parent.qsbarMode && centerSection.width > 0 && leftSection.width > 0
+        x: centerSection.x - Style.marginM - Style.borderS
+        y: Style.pixelAlignCenter(parent.height, Math.round(parent.height * 0.44))
+        width: Style.borderS
+        height: Math.round(parent.height * 0.44)
+        color: Qt.rgba(NColor.mOnSurface.r, NColor.mOnSurface.g, NColor.mOnSurface.b, 0.18)
+        z: -1
+      }
+
+      Rectangle {
+        visible: parent.qsbarMode && centerSection.width > 0 && rightSection.width > 0
+        x: centerSection.x + centerSection.width + Style.marginM
+        y: Style.pixelAlignCenter(parent.height, Math.round(parent.height * 0.44))
+        width: Style.borderS
+        height: Math.round(parent.height * 0.44)
+        color: Qt.rgba(NColor.mOnSurface.r, NColor.mOnSurface.g, NColor.mOnSurface.b, 0.18)
+        z: -1
+      }
+
+      // ---- Kairos scene chrome (backgroundStyle === "kairos") ----
+      // One morphing island at top-centre: a single tall pill hugging the
+      // centre cluster only; left/right groups float bare on the wallpaper.
+      // While media plays the island tints to the accent and grows a thin
+      // progress bed along its bottom edge — the "morph".
+      readonly property bool kairosMode: Settings.data.bar.backgroundStyle === "kairos"
+      readonly property color kairosAccent: ColorsConvert.adjustLightnessAndSaturation(NColor.mPrimary.toString(), -22, 45)
+
+      Rectangle {
+        id: kairosIsland
+        visible: parent.kairosMode && centerSection.width > 0
+        x: centerSection.x - Style.marginL
+        width: centerSection.width + Style.marginL * 2
+        height: parent.height
+        radius: Style.radiusM
+        color: {
+          if (MediaService.isPlaying)
+            return Qt.rgba(parent.kairosAccent.r, parent.kairosAccent.g, parent.kairosAccent.b, 0.30);
+          return Qt.rgba(NColor.mSurface.r, NColor.mSurface.g, NColor.mSurface.b, 0.92);
+        }
+        border.width: Style.borderS
+        border.color: MediaService.isPlaying ? Qt.rgba(parent.kairosAccent.r, parent.kairosAccent.g, parent.kairosAccent.b, 0.6) : Qt.rgba(NColor.mOutline.r, NColor.mOutline.g, NColor.mOutline.b, 0.5)
+        z: -1
+
+        Behavior on color {
+          ColorAnimation {
+            duration: Style.animationNormal
+          }
+        }
+
+        // Media progress bed — accent hairline tracking playback position
+        Rectangle {
+          visible: MediaService.isPlaying && MediaService.trackLength > 0
+          anchors.left: parent.left
+          anchors.right: parent.right
+          anchors.bottom: parent.bottom
+          anchors.leftMargin: Style.marginM
+          anchors.rightMargin: Style.marginM
+          height: Style.borderS
+          color: Qt.rgba(parent.color.r, parent.color.g, parent.color.b, 0.25)
+          radius: Style.borderS
+
+          Rectangle {
+            anchors.left: parent.left
+            anchors.top: parent.top
+            anchors.bottom: parent.bottom
+            width: parent.width * Math.min(1, MediaService.currentPosition / Math.max(1, MediaService.trackLength))
+            color: Qt.rgba(kairosIsland.parent.kairosAccent.r, kairosIsland.parent.kairosAccent.g, kairosIsland.parent.kairosAccent.b, 1)
+            radius: Style.borderS
           }
         }
       }

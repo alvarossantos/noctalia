@@ -3,6 +3,11 @@
   "bar": {
     "barType": "simple",
     "position": "top",
+    "activeStyle": "default",
+    "customStyles": [],
+    "showBarOutline": false,
+    "useGradient": false,
+    "backgroundStyle": "strip",
     "monitors": [],
     "density": "default",
     "showOutline": false,
