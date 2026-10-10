@@ -155,7 +155,7 @@ Loader {
                   anchors.bottom: parent.bottom
                   anchors.bottomMargin: (Settings.data.general.compactLockScreen ? 280 : 360) * Style.uiScaleRatio
                   radius: Style.radiusL
-                  color: Color.mTertiary
+                  color: NColor.mTertiary
                   visible: lockContext.showInfo && lockContext.infoMessage && !panelComponent.timerActive
                   opacity: visible ? 1.0 : 0.0
 
@@ -167,12 +167,12 @@ Loader {
                     NIcon {
                       icon: "circle-key"
                       pointSize: Style.fontSizeXL
-                      color: Color.mOnTertiary
+                      color: NColor.mOnTertiary
                     }
 
                     NText {
                       text: lockContext.infoMessage
-                      color: Color.mOnTertiary
+                      color: NColor.mOnTertiary
                       pointSize: Style.fontSizeL
                       horizontalAlignment: Text.AlignHCenter
                     }
@@ -194,7 +194,7 @@ Loader {
                   anchors.bottom: parent.bottom
                   anchors.bottomMargin: (Settings.data.general.compactLockScreen ? 280 : 360) * Style.uiScaleRatio
                   radius: Style.radiusL
-                  color: Color.mError
+                  color: NColor.mError
                   visible: lockContext.showFailure && lockContext.errorMessage && !panelComponent.timerActive
                   opacity: visible ? 1.0 : 0.0
 
@@ -206,12 +206,12 @@ Loader {
                     NIcon {
                       icon: "alert-circle"
                       pointSize: Style.fontSizeXL
-                      color: Color.mOnError
+                      color: NColor.mOnError
                     }
 
                     NText {
                       text: lockContext.errorMessage || "Authentication failed"
-                      color: Color.mOnError
+                      color: NColor.mOnError
                       pointSize: Style.fontSizeL
                       horizontalAlignment: Text.AlignHCenter
                     }
@@ -233,7 +233,7 @@ Loader {
                   anchors.bottom: parent.bottom
                   anchors.bottomMargin: (Settings.data.general.compactLockScreen ? 280 : 360) * Style.uiScaleRatio
                   radius: Style.radiusL
-                  color: Color.mSurface
+                  color: NColor.mSurface
                   visible: panelComponent.timerActive
                   opacity: visible ? 1.0 : 0.0
 
@@ -246,7 +246,7 @@ Loader {
                     NIcon {
                       icon: "clock"
                       pointSize: Style.fontSizeXL
-                      color: Color.mPrimary
+                      color: NColor.mPrimary
                     }
 
                     NText {
@@ -254,7 +254,7 @@ Loader {
                                       "action": I18n.tr("common." + panelComponent.pendingAction),
                                       "seconds": Math.ceil(panelComponent.timeRemaining / 1000)
                                     })
-                      color: Color.mOnSurface
+                      color: NColor.mOnSurface
                       pointSize: Style.fontSizeL
                       horizontalAlignment: Text.AlignHCenter
                       font.weight: Style.fontWeightBold
@@ -268,9 +268,9 @@ Loader {
                       icon: "x"
                       tooltipText: I18n.tr("session-menu.cancel-timer")
                       baseSize: 32
-                      colorBg: Qt.alpha(Color.mPrimary, 0.1)
-                      colorFg: Color.mPrimary
-                      colorBgHover: Color.mPrimary
+                      colorBg: Qt.alpha(NColor.mPrimary, 0.1)
+                      colorFg: NColor.mPrimary
+                      colorBgHover: NColor.mPrimary
                       onClicked: panelComponent.cancelTimer()
                     }
                   }

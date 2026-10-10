@@ -12,7 +12,7 @@ Item {
 
   // Cached wallpaper path - exposed for parent components
   property string resolvedWallpaperPath: ""
-  property color tintColor: Settings.data.colorSchemes.darkMode ? Color.mSurface : Color.mOnSurface
+  property color tintColor: Settings.data.colorSchemes.darkMode ? NColor.mSurface : NColor.mOnSurface
 
   required property var screen
 
@@ -142,19 +142,19 @@ Item {
     gradient: Gradient {
       GradientStop {
         position: 0.0
-        color: Qt.alpha(Color.mShadow, 0.4)
+        color: Qt.alpha(NColor.mShadow, 0.4)
       }
       GradientStop {
         position: 0.3
-        color: Qt.alpha(Color.mShadow, 0.2)
+        color: Qt.alpha(NColor.mShadow, 0.2)
       }
       GradientStop {
         position: 0.7
-        color: Qt.alpha(Color.mShadow, 0.25)
+        color: Qt.alpha(NColor.mShadow, 0.25)
       }
       GradientStop {
         position: 1.0
-        color: Qt.alpha(Color.mShadow, 0.5)
+        color: Qt.alpha(NColor.mShadow, 0.5)
       }
     }
   }
@@ -164,7 +164,7 @@ Item {
     anchors.fill: parent
     visible: Settings.data.general.showScreenCorners
 
-    property color cornerColor: Settings.data.general.forceBlackScreenCorners ? "black" : Color.mSurface
+    property color cornerColor: Settings.data.general.forceBlackScreenCorners ? "black" : NColor.mSurface
     property real cornerRadius: Style.screenRadius
     property real cornerSize: Style.screenRadius
 

@@ -41,8 +41,8 @@ NIconButton {
                          "profile": PowerProfileService.getName()
                        })
   tooltipDirection: BarService.getTooltipDirection(screen?.name)
-  colorBg: (PowerProfileService.profile === PowerProfile.Balanced) ? Style.capsuleColor : Color.mPrimary
-  colorFg: (PowerProfileService.profile === PowerProfile.Balanced) ? Color.resolveColorKey(iconColorKey) : Color.mOnPrimary
+  colorBg: (PowerProfileService.profile === PowerProfile.Balanced) ? Style.capsuleColor : NColor.mPrimary
+  colorFg: (PowerProfileService.profile === PowerProfile.Balanced) ? NColor.resolveColorKey(iconColorKey) : NColor.mOnPrimary
   border.color: Style.capsuleBorderColor
   border.width: Style.capsuleBorderWidth
   onClicked: PowerProfileService.cycleProfile()

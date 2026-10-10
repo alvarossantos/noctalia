@@ -156,12 +156,12 @@ Item {
     width: root.isBarVertical ? root.capsuleHeight : nBattery.width + Style.margin2S
     height: root.isBarVertical ? nBattery.height + Style.margin2S : root.capsuleHeight
     radius: Math.min(Style.radiusL, width / 2)
-    color: graphicMouseArea.containsMouse ? Color.mHover : Style.capsuleColor
+    color: graphicMouseArea.containsMouse ? NColor.mHover : Style.capsuleColor
     border.color: Style.capsuleBorderColor
     border.width: Style.capsuleBorderWidth
 
     Behavior on color {
-      enabled: !Color.isTransitioning
+      enabled: !NColor.isTransitioning
       ColorAnimation {
         duration: Style.animationFast
         easing.type: Easing.InOutQuad
@@ -182,8 +182,8 @@ Item {
     pluggedIn: root.isPluggedIn
     low: root.isLowBattery
     critical: root.isCriticalBattery
-    baseColor: graphicMouseArea.containsMouse ? Color.mOnHover : Color.mOnSurface
-    textColor: graphicMouseArea.containsMouse ? Color.mHover : Color.mSurface
+    baseColor: graphicMouseArea.containsMouse ? NColor.mOnHover : NColor.mOnSurface
+    textColor: graphicMouseArea.containsMouse ? NColor.mHover : NColor.mSurface
   }
 
   MouseArea {
@@ -237,8 +237,8 @@ Item {
     autoHide: false
     forceOpen: root.isReady && root.displayMode === "icon-always"
     forceClose: root.displayMode === "icon-only" || !root.isReady
-    customBackgroundColor: root.isCharging ? Color.mPrimary : ((root.isLowBattery || root.isCriticalBattery) ? Color.mError : "transparent")
-    customTextIconColor: root.isCharging ? Color.mOnPrimary : ((root.isLowBattery || root.isCriticalBattery) ? Color.mOnError : "transparent")
+    customBackgroundColor: root.isCharging ? NColor.mPrimary : ((root.isLowBattery || root.isCriticalBattery) ? NColor.mError : "transparent")
+    customTextIconColor: root.isCharging ? NColor.mOnPrimary : ((root.isLowBattery || root.isCriticalBattery) ? NColor.mOnError : "transparent")
     tooltipText: !getBatteryPanel()?.isPanelOpen ? root.tooltipContent : ""
     onClicked: toggleBatteryPanel()
     onRightClicked: PanelService.showContextMenu(contextMenu, pill, screen)

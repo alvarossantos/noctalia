@@ -69,7 +69,7 @@ Rectangle {
   Layout.margins: Style.borderS
   implicitWidth: tabRow.implicitWidth + (margins * 2)
   implicitHeight: tabHeight + (margins * 2)
-  color: Color.smartAlpha(Color.mSurfaceVariant)
+  color: NColor.smartAlpha(NColor.mSurfaceVariant)
   radius: Style.iRadiusM
 
   RowLayout {

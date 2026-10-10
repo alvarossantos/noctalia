@@ -38,7 +38,7 @@ NIconButton {
   readonly property string unreadBadgeColor: widgetSettings.unreadBadgeColor !== undefined ? widgetSettings.unreadBadgeColor : widgetMetadata.unreadBadgeColor
   readonly property string iconColorKey: widgetSettings.iconColor !== undefined ? widgetSettings.iconColor : widgetMetadata.iconColor
 
-  readonly property color badgeColor: Color.resolveColorKey(unreadBadgeColor)
+  readonly property color badgeColor: NColor.resolveColorKey(unreadBadgeColor)
 
   function computeUnreadCount() {
     var since = NotificationService.lastSeenTs;
@@ -68,7 +68,7 @@ NIconButton {
   }
   tooltipDirection: BarService.getTooltipDirection(screen?.name)
   colorBg: Style.capsuleColor
-  colorFg: Color.resolveColorKey(iconColorKey)
+  colorFg: NColor.resolveColorKey(iconColorKey)
   border.color: Style.capsuleBorderColor
   border.width: Style.capsuleBorderWidth
   visible: !((hideWhenZero && NotificationService.historyModel.count === 0) || (hideWhenZeroUnread && count === 0))
@@ -130,8 +130,8 @@ NIconButton {
       height: 7
       width: height
       radius: Style.radiusXS
-      color: root.hovering ? Color.mOnHover : (root.badgeColor || Color.mError)
-      border.color: Color.mSurface
+      color: root.hovering ? NColor.mOnHover : (root.badgeColor || NColor.mError)
+      border.color: NColor.mSurface
       border.width: Style.borderS
       visible: count > 0
     }

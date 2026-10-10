@@ -8,15 +8,15 @@ Slider {
   id: root
 
   readonly property bool sliderActive: activeFocus || pressed
-  property color fillColor: Color.mPrimary
-  property var cutoutColor: Color.mSurface
+  property color fillColor: NColor.mPrimary
+  property var cutoutColor: NColor.mSurface
   property bool snapAlways: true
   property real heightRatio: 0.7
   property var tooltipText
   property string tooltipDirection: "auto"
   property bool hovering: false
 
-  readonly property color effectiveFillColor: enabled ? fillColor : Color.mOutline
+  readonly property color effectiveFillColor: enabled ? fillColor : NColor.mOutline
 
   readonly property real knobDiameter: Math.round((Style.baseWidgetSize * heightRatio * Style.uiScaleRatio) / 2) * 2
   readonly property real trackHeight: Math.round((knobDiameter * 0.4 * Style.uiScaleRatio) / 2) * 2
@@ -48,9 +48,9 @@ Slider {
 
       ShapePath {
         id: bgPath
-        strokeColor: Qt.alpha(Color.mOutline, 0.5)
+        strokeColor: Qt.alpha(NColor.mOutline, 0.5)
         strokeWidth: Style.borderS
-        fillColor: Qt.alpha(Color.mSurface, 0.5)
+        fillColor: Qt.alpha(NColor.mSurface, 0.5)
 
         readonly property real w: bgContainer.width
         readonly property real h: bgContainer.height
@@ -188,7 +188,7 @@ Slider {
       implicitWidth: root.knobDiameter + root.cutoutExtra
       implicitHeight: root.knobDiameter + root.cutoutExtra
       radius: Math.min(Style.iRadiusL, width / 2)
-      color: root.cutoutColor !== undefined ? root.cutoutColor : Color.mSurface
+      color: root.cutoutColor !== undefined ? root.cutoutColor : NColor.mSurface
       x: root.visualPosition * (root.availableWidth - root.knobDiameter) - root.cutoutExtra / 2
       anchors.verticalCenter: parent.verticalCenter
     }
@@ -205,7 +205,7 @@ Slider {
       implicitWidth: knobDiameter
       implicitHeight: knobDiameter
       radius: Math.min(Style.iRadiusL, width / 2)
-      color: root.pressed ? Color.mHover : Color.mSurface
+      color: root.pressed ? NColor.mHover : NColor.mSurface
       border.color: effectiveFillColor
       border.width: Style.borderL
       anchors.centerIn: parent

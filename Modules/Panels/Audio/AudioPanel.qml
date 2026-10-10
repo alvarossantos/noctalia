@@ -175,14 +175,14 @@ SmartPanel {
             NIcon {
               icon: "settings-audio"
               pointSize: Style.fontSizeXXL
-              color: Color.mPrimary
+              color: NColor.mPrimary
             }
 
             NText {
               text: I18n.tr("panels.audio.title")
               pointSize: Style.fontSizeL
               font.weight: Style.fontWeightBold
-              color: Color.mOnSurface
+              color: NColor.mOnSurface
               Layout.fillWidth: true
             }
 
@@ -232,7 +232,7 @@ SmartPanel {
           verticalPolicy: ScrollBar.AsNeeded
           contentWidth: availableWidth
           reserveScrollbarSpace: false
-          gradientColor: Color.mSurface
+          gradientColor: NColor.mSurface
 
           ColumnLayout {
             spacing: Style.marginM
@@ -258,13 +258,13 @@ SmartPanel {
                   NText {
                     text: I18n.tr("common.output")
                     pointSize: Style.fontSizeM
-                    color: Color.mPrimary
+                    color: NColor.mPrimary
                   }
 
                   NText {
                     text: AudioService.sink ? (" - " + (AudioService.sink.description || AudioService.sink.name || "")) : ""
                     pointSize: Style.fontSizeS
-                    color: Color.mOnSurfaceVariant
+                    color: NColor.mOnSurfaceVariant
                     elide: Text.ElideRight
                     Layout.fillWidth: true
                   }
@@ -294,7 +294,7 @@ SmartPanel {
                     text: Math.round((panelContent.outputVolumeGuard ? localOutputVolume : AudioService.volume) * 100) + "%"
                     pointSize: Style.fontSizeM
                     family: Settings.data.ui.fontFixed
-                    color: Color.mOnSurface
+                    color: NColor.mOnSurface
                     opacity: enabled ? 1.0 : 0.6
                     Layout.alignment: Qt.AlignVCenter
                     Layout.preferredWidth: 45 * Style.uiScaleRatio
@@ -334,13 +334,13 @@ SmartPanel {
                   NText {
                     text: I18n.tr("common.input")
                     pointSize: Style.fontSizeM
-                    color: Color.mPrimary
+                    color: NColor.mPrimary
                   }
 
                   NText {
                     text: AudioService.source ? (" - " + (AudioService.source.description || AudioService.source.name || "")) : ""
                     pointSize: Style.fontSizeS
-                    color: Color.mOnSurfaceVariant
+                    color: NColor.mOnSurfaceVariant
                     elide: Text.ElideRight
                     Layout.fillWidth: true
                   }
@@ -370,7 +370,7 @@ SmartPanel {
                     text: Math.round((panelContent.inputVolumeGuard ? localInputVolume : AudioService.inputVolume) * 100) + "%"
                     pointSize: Style.fontSizeM
                     family: Settings.data.ui.fontFixed
-                    color: Color.mOnSurface
+                    color: NColor.mOnSurface
                     opacity: enabled ? 1.0 : 0.6
                     Layout.alignment: Qt.AlignVCenter
                     Layout.preferredWidth: 45 * Style.uiScaleRatio
@@ -640,7 +640,7 @@ SmartPanel {
                       anchors.fill: parent
                       icon: "apps"
                       pointSize: Style.fontSizeXL
-                      color: Color.mPrimary
+                      color: NColor.mPrimary
                       visible: appIconImage.status === Image.Error || appIconImage.status === Image.Null || appBox.appIcon === ""
                     }
                   }
@@ -653,7 +653,7 @@ SmartPanel {
                     NText {
                       text: appBox.appName || "Unknown App"
                       pointSize: Style.fontSizeM
-                      color: Color.mOnSurface
+                      color: NColor.mOnSurface
                       elide: Text.ElideRight
                       Layout.fillWidth: true
                     }
@@ -662,7 +662,7 @@ SmartPanel {
                       visible: appBox.appStreamTitle !== ""
                       text: appBox.appStreamTitle
                       pointSize: Style.fontSizeS
-                      color: Color.mOnSurfaceVariant
+                      color: NColor.mOnSurfaceVariant
                       elide: Text.ElideRight
                       wrapMode: Text.NoWrap
                       maximumLineCount: 1
@@ -693,7 +693,7 @@ SmartPanel {
                         text: Math.round((appBox.appVolume !== undefined ? appBox.appVolume : 0.0) * 100) + "%"
                         pointSize: Style.fontSizeM
                         family: Settings.data.ui.fontFixed
-                        color: Color.mOnSurface
+                        color: NColor.mOnSurface
                         opacity: enabled ? 1.0 : 0.6
                         Layout.alignment: Qt.AlignVCenter
                         Layout.preferredWidth: 45 * Style.uiScaleRatio
@@ -726,7 +726,7 @@ SmartPanel {
               visible: panelContent.appStreams.length === 0
               text: I18n.tr("panels.audio.panel-applications-empty")
               pointSize: Style.fontSizeM
-              color: Color.mOnSurfaceVariant
+              color: NColor.mOnSurfaceVariant
               horizontalAlignment: Text.AlignHCenter
               Layout.fillWidth: true
               Layout.topMargin: Style.marginXL
@@ -741,7 +741,7 @@ SmartPanel {
           verticalPolicy: ScrollBar.AsNeeded
           contentWidth: availableWidth
           reserveScrollbarSpace: false
-          gradientColor: Color.mSurface
+          gradientColor: NColor.mSurface
 
           // AudioService Devices
           ColumnLayout {
@@ -769,7 +769,7 @@ SmartPanel {
                 NText {
                   text: I18n.tr("panels.audio.devices-output-device-label")
                   pointSize: Style.fontSizeL
-                  color: Color.mPrimary
+                  color: NColor.mPrimary
                 }
 
                 Repeater {
@@ -812,7 +812,7 @@ SmartPanel {
                 NText {
                   text: I18n.tr("panels.audio.devices-input-device-label")
                   pointSize: Style.fontSizeL
-                  color: Color.mPrimary
+                  color: NColor.mPrimary
                 }
 
                 Repeater {

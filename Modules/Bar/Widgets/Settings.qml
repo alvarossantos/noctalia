@@ -31,7 +31,7 @@ NIconButton {
 
   readonly property string valueIconColor: widgetSettings.iconColor !== undefined ? widgetSettings.iconColor : widgetMetadata.iconColor
 
-  readonly property color iconColor: Color.resolveColorKey(valueIconColor)
+  readonly property color iconColor: NColor.resolveColorKey(valueIconColor)
 
   icon: "settings"
   tooltipText: {
@@ -47,8 +47,8 @@ NIconButton {
   customRadius: Style.radiusL
   colorBg: Style.capsuleColor
   colorFg: iconColor
-  colorBgHover: Color.mHover
-  colorFgHover: Color.mOnHover
+  colorBgHover: NColor.mHover
+  colorFgHover: NColor.mOnHover
   colorBorder: Style.capsuleBorderColor
   colorBorderHover: Style.capsuleBorderColor
 

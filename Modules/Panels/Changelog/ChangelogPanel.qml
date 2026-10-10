@@ -18,9 +18,9 @@ SmartPanel {
 
   panelContent: Rectangle {
     id: panelContent
-    color: Color.mSurfaceVariant
+    color: NColor.mSurfaceVariant
     radius: Style.radiusM
-    border.color: Color.mOutline
+    border.color: NColor.mOutline
     border.width: Style.borderS
 
     readonly property string currentVersion: UpdateService.currentVersion
@@ -31,7 +31,7 @@ SmartPanel {
     function colorizeHeaders(text) {
       if (!text)
         return "";
-      const color = Color.mPrimary;
+      const color = NColor.mPrimary;
       return text.replace(/^# (.*)$/gm, `<br/><h1 style="color:${color}">$1</h1><br/>`).replace(/^## (.*)$/gm, `<br/><h2 style="color:${color}">$1</h2><br/>`);
     }
     readonly property string subtitleText: hasPreviousVersion ? I18n.tr("changelog.panel.subtitle-updated", {
@@ -49,7 +49,7 @@ SmartPanel {
 
         NIcon {
           icon: "sparkles"
-          color: Color.mPrimary
+          color: NColor.mPrimary
           pointSize: Style.fontSizeXXL
         }
 
@@ -63,13 +63,13 @@ SmartPanel {
                           })
             pointSize: Style.fontSizeXL
             font.weight: Style.fontWeightBold
-            color: Color.mPrimary
+            color: NColor.mPrimary
             wrapMode: Text.WordWrap
           }
 
           NText {
             text: subtitleText
-            color: Color.mOnSurface
+            color: NColor.mOnSurface
             opacity: Style.opacityMedium
             wrapMode: Text.WordWrap
           }
@@ -92,9 +92,9 @@ SmartPanel {
       Rectangle {
         clip: true
         Layout.fillWidth: true
-        color: Qt.alpha(Color.mPrimary, 0.08)
+        color: Qt.alpha(NColor.mPrimary, 0.08)
         radius: Style.radiusS
-        border.color: Color.mPrimary
+        border.color: NColor.mPrimary
         border.width: Style.borderS
 
         RowLayout {
@@ -105,18 +105,18 @@ SmartPanel {
           NText {
             text: hasPreviousVersion ? previousVersion : I18n.tr("changelog.panel.version-new-user")
             font.weight: Style.fontWeightSemiBold
-            color: Color.mPrimary
+            color: NColor.mPrimary
           }
 
           NIcon {
             icon: "arrow-right"
-            color: Color.mPrimary
+            color: NColor.mPrimary
           }
 
           NText {
             text: currentVersion || UpdateService.currentVersion
             font.weight: Style.fontWeightSemiBold
-            color: Color.mPrimary
+            color: NColor.mPrimary
           }
         }
       }
@@ -140,7 +140,7 @@ SmartPanel {
           NText {
             visible: UpdateService.fetchError !== ""
             text: UpdateService.fetchError
-            color: Color.mError
+            color: NColor.mError
             wrapMode: Text.WordWrap
           }
 
@@ -151,13 +151,13 @@ SmartPanel {
             wrapMode: Text.WordWrap
             elide: Text.ElideNone
             textFormat: Text.MarkdownText
-            color: Color.mOnSurface
+            color: NColor.mOnSurface
           }
 
           NText {
             visible: releaseContent.length === 0
             text: I18n.tr("changelog.panel.empty")
-            color: Color.mOnSurfaceVariant
+            color: NColor.mOnSurfaceVariant
             wrapMode: Text.WordWrap
           }
         }

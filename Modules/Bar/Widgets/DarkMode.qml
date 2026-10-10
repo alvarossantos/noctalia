@@ -35,7 +35,7 @@ NIconButton {
   applyUiScale: false
   customRadius: Style.radiusL
   colorBg: Style.capsuleColor
-  colorFg: Color.resolveColorKey(iconColorKey)
+  colorFg: NColor.resolveColorKey(iconColorKey)
   onClicked: Settings.data.colorSchemes.darkMode = !Settings.data.colorSchemes.darkMode
 
   border.color: Style.capsuleBorderColor

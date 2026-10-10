@@ -70,7 +70,7 @@ ColumnLayout {
                               }
                               badges.push({
                                             "icon": "plugin",
-                                            "color": Color.mSecondary
+                                            "color": NColor.mSecondary
                                           });
                             }
                             availableWidgets.append({

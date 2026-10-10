@@ -32,12 +32,12 @@ Rectangle {
   topRightRadius: isLast ? Style.iRadiusM : Style.iRadiusXXXS
   bottomRightRadius: isLast ? Style.iRadiusM : Style.iRadiusXXXS
 
-  color: root.isHovered ? Color.mHover : (root.checked ? Color.mPrimary : Color.smartAlpha(Color.mSurface))
-  border.color: root.checked ? Color.mPrimary : Color.mOutline
+  color: root.isHovered ? NColor.mHover : (root.checked ? NColor.mPrimary : NColor.smartAlpha(NColor.mSurface))
+  border.color: root.checked ? NColor.mPrimary : NColor.mOutline
   border.width: Style.borderS
 
   Behavior on color {
-    enabled: !Color.isTransitioning
+    enabled: !NColor.isTransitioning
     ColorAnimation {
       duration: Style.animationFast
       easing.type: Easing.OutCubic
@@ -56,10 +56,10 @@ Rectangle {
       Layout.alignment: Qt.AlignVCenter
       icon: root.icon
       pointSize: root.pointSize * 1.2
-      color: root.isHovered ? Color.mOnHover : (root.checked ? Color.mOnPrimary : Color.mOnSurface)
+      color: root.isHovered ? NColor.mOnHover : (root.checked ? NColor.mOnPrimary : NColor.mOnSurface)
 
       Behavior on color {
-        enabled: !Color.isTransitioning
+        enabled: !NColor.isTransitioning
         ColorAnimation {
           duration: Style.animationFast
           easing.type: Easing.OutCubic
@@ -74,12 +74,12 @@ Rectangle {
       text: root.text
       pointSize: root.pointSize
       font.weight: Style.fontWeightSemiBold
-      color: root.isHovered ? Color.mOnHover : (root.checked ? Color.mOnPrimary : Color.mOnSurface)
+      color: root.isHovered ? NColor.mOnHover : (root.checked ? NColor.mOnPrimary : NColor.mOnSurface)
       horizontalAlignment: Text.AlignHCenter
       verticalAlignment: Text.AlignVCenter
 
       Behavior on color {
-        enabled: !Color.isTransitioning
+        enabled: !NColor.isTransitioning
         ColorAnimation {
           duration: Style.animationFast
           easing.type: Easing.OutCubic

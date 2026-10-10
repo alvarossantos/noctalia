@@ -19,10 +19,10 @@ Item {
   property real baseSize: Style.fontSizeM
 
   // Styling - no hardcoded colors, only theme colors
-  property color baseColor: Color.mOnSurface
-  property color lowColor: Color.mError
-  property color chargingColor: Color.mPrimary
-  property color textColor: Color.mSurface
+  property color baseColor: NColor.mOnSurface
+  property color lowColor: NColor.mError
+  property color chargingColor: NColor.mPrimary
+  property color textColor: NColor.mSurface
 
   // Display options
   property bool showPercentageText: true

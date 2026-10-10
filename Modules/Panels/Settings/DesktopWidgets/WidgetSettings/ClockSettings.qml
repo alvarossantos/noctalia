@@ -204,9 +204,9 @@ ColumnLayout {
       Rectangle {
         Layout.preferredWidth: 320
         Layout.preferredHeight: 160
-        color: Color.mSurfaceVariant
+        color: NColor.mSurfaceVariant
         radius: Style.radiusM
-        border.color: Color.mSecondary
+        border.color: NColor.mSecondary
         border.width: Style.borderS
 
         Behavior on border.color {
@@ -232,7 +232,7 @@ ColumnLayout {
                 family: valueUseCustomFont && valueCustomFont ? valueCustomFont : Settings.data.ui.fontDefault
                 pointSize: Style.fontSizeM
                 font.weight: Style.fontWeightBold
-                color: Color.resolveColorKey(valueClockColor)
+                color: NColor.resolveColorKey(valueClockColor)
                 wrapMode: Text.WordWrap
                 Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
 

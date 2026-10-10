@@ -549,9 +549,9 @@ Variants {
                 id: cardBackground
                 anchors.fill: parent
                 radius: Style.radiusL
-                border.color: Qt.alpha(Color.mOutline, Color.adaptiveOpacity(Settings.data.notifications.backgroundOpacity) || 1.0)
+                border.color: Qt.alpha(NColor.mOutline, NColor.adaptiveOpacity(Settings.data.notifications.backgroundOpacity) || 1.0)
                 border.width: Style.borderS
-                color: Qt.alpha(Color.mSurface, Color.adaptiveOpacity(Settings.data.notifications.backgroundOpacity) || 1.0)
+                color: Qt.alpha(NColor.mSurface, NColor.adaptiveOpacity(Settings.data.notifications.backgroundOpacity) || 1.0)
 
                 // Progress bar
                 Rectangle {
@@ -569,8 +569,8 @@ Variants {
                     width: progressWidth * model.progress
 
                     color: {
-                      var baseColor = model.urgency === 2 ? Color.mError : model.urgency === 0 ? Color.mOnSurface : Color.mPrimary;
-                      return Qt.alpha(baseColor, Color.adaptiveOpacity(Settings.data.notifications.backgroundOpacity) || 1.0);
+                      var baseColor = model.urgency === 2 ? NColor.mError : model.urgency === 0 ? NColor.mOnSurface : NColor.mPrimary;
+                      return Qt.alpha(baseColor, NColor.adaptiveOpacity(Settings.data.notifications.backgroundOpacity) || 1.0);
                     }
 
                     antialiasing: true
@@ -642,21 +642,21 @@ Variants {
                         Layout.preferredHeight: 6
                         Layout.alignment: Qt.AlignVCenter
                         radius: Style.radiusXS
-                        color: model.urgency === 2 ? Color.mError : model.urgency === 0 ? Color.mOnSurface : Color.mPrimary
+                        color: model.urgency === 2 ? NColor.mError : model.urgency === 0 ? NColor.mOnSurface : NColor.mPrimary
                       }
 
                       NText {
                         text: model.appName || "Unknown App"
                         pointSize: Style.fontSizeXS
                         font.weight: Style.fontWeightBold
-                        color: Color.mSecondary
+                        color: NColor.mSecondary
                       }
 
                       NText {
                         textFormat: Text.PlainText
                         text: " " + Time.formatRelativeTime(model.timestamp)
                         pointSize: Style.fontSizeXXS
-                        color: Color.mOnSurfaceVariant
+                        color: NColor.mOnSurfaceVariant
                         Layout.alignment: Qt.AlignBottom
                       }
 
@@ -669,7 +669,7 @@ Variants {
                       text: model.summary || I18n.tr("common.no-summary")
                       pointSize: Style.fontSizeM
                       font.weight: Style.fontWeightMedium
-                      color: Color.mOnSurface
+                      color: NColor.mOnSurface
                       textFormat: Text.StyledText
                       wrapMode: Text.WrapAtWordBoundaryOrAnywhere
                       maximumLineCount: 3
@@ -682,7 +682,7 @@ Variants {
                     NText {
                       text: model.body || ""
                       pointSize: Style.fontSizeM
-                      color: Color.mOnSurface
+                      color: NColor.mOnSurface
                       textFormat: Text.StyledText
                       wrapMode: Text.WrapAtWordBoundaryOrAnywhere
 
@@ -724,9 +724,9 @@ Variants {
                             return actionText;
                           }
                           fontSize: Style.fontSizeS
-                          backgroundColor: Color.mPrimary
-                          textColor: hovered ? Color.mOnHover : Color.mOnPrimary
-                          hoverColor: Color.mHover
+                          backgroundColor: NColor.mPrimary
+                          textColor: hovered ? NColor.mOnHover : NColor.mOnPrimary
+                          hoverColor: NColor.mHover
                           outlined: false
                           implicitHeight: 24
                           onClicked: {
@@ -783,7 +783,7 @@ Variants {
                     text: model.summary || I18n.tr("common.no-summary")
                     pointSize: Style.fontSizeM
                     font.weight: Style.fontWeightMedium
-                    color: Color.mOnSurface
+                    color: NColor.mOnSurface
                     textFormat: Text.StyledText
                     maximumLineCount: 1
                     elide: Text.ElideRight
@@ -795,7 +795,7 @@ Variants {
                     Layout.fillWidth: true
                     text: model.body || ""
                     pointSize: Style.fontSizeS
-                    color: Color.mOnSurfaceVariant
+                    color: NColor.mOnSurfaceVariant
                     textFormat: Text.StyledText
                     wrapMode: Text.Wrap
                     maximumLineCount: 2
